@@ -1,2 +1,29 @@
+# зависимости
 node_modules/
 *.node
+
+# выходные директории
+.next/
+dist/
+build/
+
+# логи и временные файлы
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# среды и конфиденциальные данные
+.env
+.env.local
+.env.*.local
+
+# system
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
+*.swp
