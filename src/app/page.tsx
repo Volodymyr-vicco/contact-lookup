@@ -12,6 +12,11 @@ export default function ContactLookup() {
   const [searchValue, setSearchValue] = useState("");
   const [matchFound, setMatchFound] = useState(false);
   const [contactId, setContactId] = useState<string | null>(null); // Состояние для ID
+  const [firstName, setFirstName] = useState<string | null>(null); // Состояние для имени
+  const [lastName, setLastName] = useState<string | null>(null); // Состояние для фамилии
+  const [city, setCity] = useState<string | null>(null); // Состояние для города
+  const [np, setNp] = useState<string | null>(null); // Состояние для НП
+  const [orderNumber, setOrderNumber] = useState<string | null>(null); // Состояние для номера заказа
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,13 +50,30 @@ export default function ContactLookup() {
     const foundRow = data.find((row) => row[columnIndex] === searchValue);
 
     if (foundRow) {
-      // Если найдено совпадение, то получаем ID из соответствующей строки
-      const idIndex = headers.indexOf("ID"); // Индекс колонки "ID"
-      setContactId(foundRow[idIndex]); // Записываем ID в состояние
+      // Если найдено совпадение, то получаем данные из соответствующей строки
+      const idIndex = headers.indexOf("ID");
+      const firstNameIndex = headers.indexOf("Имя");
+      const lastNameIndex = headers.indexOf("Фамилия");
+      const cityIndex = headers.indexOf("Город");
+      const npIndex = headers.indexOf("НП");
+      const orderNumberIndex = headers.indexOf("Номер из-заказов");
+
+      setContactId(foundRow[idIndex]);
+      setFirstName(foundRow[firstNameIndex]);
+      setLastName(foundRow[lastNameIndex]);
+      setCity(foundRow[cityIndex]);
+      setNp(foundRow[npIndex]);
+      setOrderNumber(foundRow[orderNumberIndex]);
+      
       setMatchFound(true);
     } else {
       setMatchFound(false);
       setContactId(null);
+      setFirstName(null);
+      setLastName(null);
+      setCity(null);
+      setNp(null);
+      setOrderNumber(null);
     }
   };
 
@@ -101,7 +123,12 @@ export default function ContactLookup() {
               {matchFound ? (
                 <>
                   <p className="text-green-600">Контакт найден ✅</p>
-                  <p className="text-blue-600">ID: {contactId}</p> {/* Выводим найденный ID */}
+                  <p className="text-blue-600">ID: {contactId}</p>
+                  <p className="text-blue-600">Имя: {firstName}</p>
+                  <p className="text-blue-600">Фамилия: {lastName}</p>
+                  <p className="text-blue-600">Город: {city}</p>
+                  <p className="text-blue-600">НП: {np}</p>
+                  <p className="text-blue-600">Номер из-заказов: {orderNumber}</p>
                 </>
               ) : (
                 <div>
